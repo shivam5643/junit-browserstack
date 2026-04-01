@@ -107,6 +107,16 @@ jobs:
           cd junit-5
           gradle clean sampleLocalTest -PtargetJavaVersion=${{ matrix.java }}
       - if: always()
+        name: Upload test results and logs
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results-java${{ matrix.java }}-${{ matrix.os }}
+          path: |
+            junit-4/target/surefire-reports/
+            junit-5/target/surefire-reports/
+            logs/
+          retention-days: 30
+      - if: always()
         uses: actions/github-script@98814c53be79b1d30f795b907e553d8679345975
         id: status-check-completed
         env:
