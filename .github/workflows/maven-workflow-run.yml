@@ -108,7 +108,7 @@ jobs:
           gradle clean sampleLocalTest -PtargetJavaVersion=${{ matrix.java }}
       - if: always()
         name: Upload test results and logs
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: test-results-java${{ matrix.java }}-${{ matrix.os }}
           path: |
