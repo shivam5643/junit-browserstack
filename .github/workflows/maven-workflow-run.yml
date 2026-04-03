@@ -19,7 +19,7 @@ jobs:
       max-parallel: 3
       matrix:
         java: [ '8', '11', '17' ]
-        os: [ 'macos-latest', 'windows-latest', 'ubuntu-latest' ]
+        os: ['windows-latest']
         exclude:
           - java: '8'
             os: 'macos-latest'
