@@ -16,11 +16,9 @@ group = 'com.browserstack'
 version = '1.0-SNAPSHOT'
 description = 'junit-browserstack'
 
-def targetJavaVersion = (project.findProperty('targetJavaVersion') ?: '8') as String
 java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(Integer.parseInt(targetJavaVersion))
-    }
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 def browserstackSDKArtifact = configurations?.compileClasspath?.resolvedConfiguration?.resolvedArtifacts?.find { it.name == 'browserstack-java-sdk' }
