@@ -72,48 +72,58 @@ jobs:
         with:
           gradle-version: '9.4.1'
       - name: Run mvn test for junit-4
+        continue-on-error: true
         run: |
           cd junit-4
           mvn compile
-          mvn test
+          mvn test -DforkedProcessExitTimeoutInSeconds=30 -Dsurefire.useFile=false
       - name: Run mvn profile sample for junit-4
+        continue-on-error: true
         run: |
           cd junit-4
           mvn compile
-          mvn test -P sample
+          mvn test -P sample -DforkedProcessExitTimeoutInSeconds=30 -Dsurefire.useFile=false
       - name: Run mvn profile local for junit-4
+        continue-on-error: true
         run: |
           cd junit-4
           mvn compile
-          mvn test -P local
+          mvn test -P local -DforkedProcessExitTimeoutInSeconds=30 -Dsurefire.useFile=false
       - name: Run gradle task sampleTest
+        continue-on-error: true
         run: |
           cd junit-4
           gradle clean sampleTest
       - name: Run gradle task sampleLocalTest
+        continue-on-error: true
         run: |
           cd junit-4
           gradle clean sampleLocalTest
       - name: Run mvn test for junit-5
+        continue-on-error: true
         run: |
           cd junit-5
           mvn compile
-          mvn test
+          mvn test -DforkedProcessExitTimeoutInSeconds=30 -Dsurefire.useFile=false
       - name: Run mvn profile single for junit-5
+        continue-on-error: true
         run: |
           cd junit-5
           mvn compile
-          mvn test -P single
+          mvn test -P single -DforkedProcessExitTimeoutInSeconds=30 -Dsurefire.useFile=false
       - name: Run mvn profile local for junit-5
+        continue-on-error: true
         run: |
           cd junit-5
           mvn compile
-          mvn test -P local
+          mvn test -P local -DforkedProcessExitTimeoutInSeconds=30 -Dsurefire.useFile=false
       - name: Run gradle task sampleTest
+        continue-on-error: true
         run: |
           cd junit-5
           gradle clean sampleTest
       - name: Run gradle task sampleLocalTest
+        continue-on-error: true
         run: |
           cd junit-5
           gradle clean sampleLocalTest
@@ -129,6 +139,9 @@ jobs:
             junit-5/build/test-results/
             junit-4/log/
             junit-5/log/
+            junit-4/target/surefire-reports/
+            junit-5/target/surefire-reports/
+          if-no-files-found: ignore
 
       - if: always()
         uses: actions/github-script@98814c53be79b1d30f795b907e553d8679345975

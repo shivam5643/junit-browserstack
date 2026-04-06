@@ -18,6 +18,7 @@ description = 'junit-browserstack'
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 def browserstackSDKArtifact = configurations.compileClasspath.resolvedConfiguration.resolvedArtifacts.find { it.name == 'browserstack-java-sdk' }
@@ -32,15 +33,15 @@ tasks.withType(Test) {
 }
 
 task sampleTest(type: Test) {
+    dependsOn cleanTest
     useJUnit() {
-        dependsOn cleanTest
         include '**/*BStackSampleTest.*'
     }
 }
 
 task sampleLocalTest(type: Test) {
+    dependsOn cleanTest
     useJUnit() {
-        dependsOn cleanTest
         include '**/*BStackLocalTest.*'
     }
 }
